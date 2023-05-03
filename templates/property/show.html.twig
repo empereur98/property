@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+
+        </div>
+        <div class="col-md-4">
+            <div class="text-start mt-4 fw-bold fs-2 text-capitalize">{{produit.title}}</div>
+            <p class="fs-4 fw-medium mt-3">{{produit.rooms}} pieces  -   {{produit.surface}} m2</p>
+            <p class="fs-1 text-primary fw-bolder ">{{produit.formattedprice}} $</p>
+            <a href="#" class="btn btn-primary display-block">contacter l'agence</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <h2>caracteristique</h2>
+            <table class="table table-striped">
+                <tr>
+                    <td>Surface Habitable</td>
+                    <td>{{produit.surface}} m2</td>
+                </tr>
+                <tr>
+                    <td>pieces</td>
+                    <td>{{produit.rooms}}</td>
+                </tr>
+                <tr>
+                    <td>Chambres</td>
+                    <td>{{produit.bedrooms}}</td>
+                </tr>
+                <tr>
+                    <td>Etages</td>
+                    <td>{{produit.floor}}</td>
+                </tr>
+                <tr>
+                    <td>Chauffage</td>
+                    <td>{{produit.head}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-4">
+            <h2 class="fw-bolder">Specificites</h2>    
+        </div>
+    </div>
+</div>
+{% endblock %}
