@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+{% block body %}
+  <div class="container">
+      <h1 class="mt-5 text-right">liste des biens</h1>
+      <hr>
+       {% for messages in app.flashes('success') %}
+        <div class="alert alert-success">{{messages}}</div>
+       {% endfor %}
+      <table class="table table-striped">
+       <thead>
+         <tr>
+           <th>Titres</th>
+           <th coldspan="2">Actions</th>
+         </tr>
+       </thead>
+       <tbody>
+          {% for produit in produits %}
+           <tr>
+             <td>{{produit.title}}</td>
+             <td><a href="{{path('edit',{id: produit.id})}}" class="btn btn-primary">editer</a></td>
+             <td>
+               <form method="POST" action="{{path('delete',{id: produit.id})}}">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{csrf_token('delete' ~ produit.id)}}">
+                <button class="btn btn-danger">supprimer</button>
+               </form>
+             </td>
+           </tr>
+          {% endfor %}
+       </tbody>
+      </table>
+      <div class="text-end">
+       <a href="{{path('ajouter')}}" class="btn btn-primary">creer un nouveau biens</a>
+      </div>
+</div>  
+{% endblock %}

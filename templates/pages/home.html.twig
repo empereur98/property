@@ -8,8 +8,8 @@
 		<h3>vos derniers biens</h3>
 		<div class="row-flex">
 	{% for property in properties %}
-		<div class="col-3">
-			<div class="card">
+		<div class="col-3 d-inline-block">
+			<div class="card m-3">
 				<div class="card-body">
 					<div class="card-title">
 						<h5><a href="{{path('property.show',{id : property.id, slug: property.slug })}}">{{property.title}}</a></h5>

@@ -30,4 +30,5 @@ class Propertycontroller extends AbstractController{
             'produit'=>$produit
         ]));
     }
+    
 }

@@ -23,6 +23,10 @@ services:
            tags: ['controller.service_arguments']
     Controller\Propertycontroller:
            tags: ['controller.services_arguments']
+    Controller\Admin\Admincontroller:
+            tags: ['controller.services_arguments']
+    Controller\Security\Securitycontroller:
+             tags: ['controller.services_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

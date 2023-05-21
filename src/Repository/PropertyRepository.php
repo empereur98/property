@@ -63,7 +63,12 @@ return $this->connect()
     }
     private function connect(){
         return $this->createQueryBuilder('p')
-                    ->andWhere('p.sold=false');
+                    ->andWhere('p.sold=1');
+    }
+    public function delete(Property $property):void
+    {
+         $this->remove($property,true);
+        // returns an array of arrays (i.e. a raw data set)
     }
 //    /**
 //     * @return Property[] Returns an array of Property objects

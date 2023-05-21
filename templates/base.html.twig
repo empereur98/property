@@ -27,9 +27,17 @@
           <a class="nav-link active" aria-current="page" href="{{path('home')}}">Ma boite</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if (current_menu is defined and current_menu =='propriete') %} active{% endif %}" href="{{path('propriete')}}">property</a>
+          <a class="nav-link {% if (current_menu is defined and current_menu =='admin') %} active{% endif %}" href="{{path('admin')}}">admin</a>
         </li> 
       </ul>
+       {% if app.user %}
+       <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="{{path('app_logout')}}" class="nav-link">se deconnecter</a>
+        </li>
+      </ul>
+       {% endif %}
+      
     </div>
   </div>
 </nav>

@@ -6,6 +6,7 @@ use App\Repository\PropertyRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PropertyRepository::class)]
 class Property
@@ -26,6 +27,7 @@ class Property
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\Range(min:"10",max:"400")]
     private ?int $surface = null;
 
     #[ORM\Column]
