@@ -2,18 +2,22 @@
 namespace Controller;
 
 use App\Entity\Property;
+use App\Entity\Searchdata;
+use App\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Contracts\Translation\TranslatorInterface;
 class Propertycontroller extends AbstractController{
     #[Route('/property','propriete')]
     public function index(EntityManagerInterface $entityManager):Response{
-        $name=$entityManager->getRepository(Property::class);
-         $products=$name->findfloor();
+         $produits=$entityManager->getRepository(Property::class)->findAll();
         return $this->render('pages/property.html.twig',[
-            'current_menu'=>'propriete'
+            'current_menu'=>'propriete',
+            'properties'=>$produits
         ]);
     }
     #[Route('/biens/{slug}-{id}','property.show')]
@@ -30,5 +34,26 @@ class Propertycontroller extends AbstractController{
             'produit'=>$produit
         ]));
     }
-    
+    /**
+     * @return Response
+     */
+    #[Route('/property','propriete')]
+    public function paginate(PaginatorInterface $paginator, Request $request,EntityManagerInterface $em){
+        $search=new Searchdata();
+        $form=$this->createForm(SearchType::class,$search); 
+       // $form->handleRequest($request);
+        $dql="SELECT a FROM App\Entity\Property a";
+    $query = $em->createQuery($dql);
+    $pagination = $paginator->paginate(
+        $query, /* query NOT result */
+        $request->query->getInt('page', 1), /*page number*/
+        10); /*limit per page*/
+    //$pagination->setTemplate('my_pagination.html.twig');
+        $page=$request->query->getInt('page',1);
+        //$pagination->setTemplate('my_pagination.html.twig');
+        dump($pagination);
+        return new Response($this->render('pages/property.html.twig',[
+           'pagination'=>$pagination,
+        ]));
+}
 }

@@ -1,10 +1,35 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<ul class="list-group mt-4">
-  <li class="list-group-item">An item</li>
-  <li class="list-group-item">A second item</li>
-  <li class="list-group-item">A third item</li>
-  <li class="list-group-item">A fourth item</li>
-  <li class="list-group-item">And a fifth one</li>
-</ul>
-{% endblock %}
+  {# total items count #}
+   <div class="jumbotron">
+    <div class="row">
+      {{form_start('form')}}
+      {{form_end('form')}}
+     </div>
+    </div>
+  {% do pagination.setTemplate('@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') %}
+<div class="container">
+  <h3 class="mt-3">vos biens</h3>
+      <div class="row-flex">
+        {% for property in pagination %}
+          <div class="col-3 d-inline-block">
+            <div class="card m-1">
+              <div class="card-body">
+                <div class="card-title">
+                  <h5><a href="{{path('property.show',{id : property.id, slug: property.slug })}}">{{property.title}}</a></h5>
+                </div>
+                <div class="card-text">
+                  <p>{{property.city}} {{property.post}}</p>
+                </div>
+                <div class="text-primary fw-bold p-2 fs-2">{{property.formattedprice()}}$</div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+</div>
+{# display navigation #}
+<div class="pagination">
+  {{ knp_pagination_render(pagination)}}
+</div>
+{% endblock body %}

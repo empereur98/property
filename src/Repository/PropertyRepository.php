@@ -5,8 +5,9 @@ namespace App\Repository;
 use App\Entity\Property;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
-
+use Knp\Component\Pager\PaginatorInterface;
 /**
  * @extends ServiceEntityRepository<Property>
  *
@@ -57,19 +58,19 @@ class PropertyRepository extends ServiceEntityRepository
      */
     public function findlass():array{
 return $this->connect()
-            ->setMaxResults(4)
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult();
     }
     private function connect(){
-        return $this->createQueryBuilder('p')
-                    ->andWhere('p.sold=1');
+        return $this->createQueryBuilder('p');
     }
     public function delete(Property $property):void
     {
          $this->remove($property,true);
         // returns an array of arrays (i.e. a raw data set)
     }
+    
 //    /**
 //     * @return Property[] Returns an array of Property objects
 //     */

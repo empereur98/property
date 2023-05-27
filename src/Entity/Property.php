@@ -52,7 +52,7 @@ class Property
     private ?string $address = null;
 
     #[ORM\Column]
-    private ?int $post = null;
+    private ?string $post = null;
 
     #[ORM\Column]
     private bool $sold = false;
@@ -214,12 +214,12 @@ class Property
         return $this;
     }
 
-    public function getPost(): ?int
+    public function getPost(): ?string
     {
         return $this->post;
     }
 
-    public function setPost(int $post): self
+    public function setPost(string $post): self
     {
         $this->post = $post;
 
