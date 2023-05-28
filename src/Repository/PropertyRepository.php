@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Property;
+use App\Entity\Searchdata;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManager;
@@ -61,6 +62,18 @@ return $this->connect()
             ->setMaxResults(5)
             ->getQuery()
             ->getResult();
+    }
+    public  function price(Searchdata $search){
+        $query=$this->connect();
+        if($search->getMaxprice()){
+            $query=$query->andwhere('p.price<:maxprice')
+                         ->setparameter('maxprice',$search->getMaxprice());
+        }
+        if($search->getMinsurface()){
+            $query=$query->andWhere('p.surface>:price')
+                         ->setParameter('price',$search->getMinsurface());
+        }
+        return $query->getQuery();
     }
     private function connect(){
         return $this->createQueryBuilder('p');

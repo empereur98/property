@@ -15,7 +15,7 @@
 						<h5><a href="{{path('property.show',{id : property.id, slug: property.slug })}}">{{property.title}}</a></h5>
 					</div>
 					<div class="card-text">
-						<p>{{property.city}} {{property.post}}</p>
+						<p><span class="fw-bold">{{property.surface}}m2</span>  {{property.city}} BP:{{property.post}}</p>
 					</div>
 					<div class="text-primary fw-bold p-2 fs-2">{{property.formattedprice()}}$</div>
 				</div>

@@ -41,9 +41,9 @@ class Propertycontroller extends AbstractController{
     public function paginate(PaginatorInterface $paginator, Request $request,EntityManagerInterface $em){
         $search=new Searchdata();
         $form=$this->createForm(SearchType::class,$search); 
-       // $form->handleRequest($request);
-        $dql="SELECT a FROM App\Entity\Property a";
-    $query = $em->createQuery($dql);
+        $form->handleRequest($request);
+        $search=$form->getData();
+        $query=$em->getRepository(Property::class)->price($search);
     $pagination = $paginator->paginate(
         $query, /* query NOT result */
         $request->query->getInt('page', 1), /*page number*/
@@ -54,6 +54,7 @@ class Propertycontroller extends AbstractController{
         dump($pagination);
         return new Response($this->render('pages/property.html.twig',[
            'pagination'=>$pagination,
+           'form'=>$form->createView()
         ]));
 }
 }
