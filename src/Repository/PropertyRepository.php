@@ -73,6 +73,19 @@ return $this->connect()
             $query=$query->andWhere('p.surface>:price')
                          ->setParameter('price',$search->getMinsurface());
         }
+        $searchs=$search->getOptions();
+        if(isset($searchs)){
+             if($searchs->count()==1){
+                $query=$query->andWhere(':option MEMBER OF p.options')
+                             ->setParameter('option',$searchs->getValues());
+        }
+        if($searchs->count()>1){
+             for ($i=0; $i < $searchs->count(); $i++) { 
+                $query=$query->andWhere(":option$i MEMBER OF p.options")
+                             ->setParameter("option$i",$searchs->getValues()[$i]);
+             }
+        }
+    }
         return $query->getQuery();
     }
     private function connect(){

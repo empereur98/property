@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-
+           <img src="{{vich_uploader_asset(produit,'imageFile') | imagine_filter('card')}}" class="img-fluid mt-4">
         </div>
         <div class="col-md-4">
             <div class="text-start mt-4 fw-bold fs-2 text-capitalize">{{produit.title}}</div>
@@ -39,7 +39,12 @@
             </table>
         </div>
         <div class="col-4">
-            <h2 class="fw-bolder">Specificites</h2>    
+            <h2 class="fw-bolder">Specificites</h2>
+             {% for row in option %}
+             <ul>
+                <li>{{row.getName()}}</li>
+             </ul>
+             {% endfor %}
         </div>
     </div>
 </div>

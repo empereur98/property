@@ -27,7 +27,7 @@ services:
             tags: ['controller.services_arguments']
     Controller\Security\Securitycontroller:
              tags: ['controller.services_arguments']
-    App\Entity\Searchdata:
+    Controller\Admin\OptionController:
              tags: ['controller.services_arguments']
 
     # add more service definitions when explicit configuration is needed
