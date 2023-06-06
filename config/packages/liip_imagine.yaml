@@ -1,0 +1,39 @@
+# Documentation on how to configure the bundle can be found at: https://symfony.com/doc/current/bundles/LiipImagineBundle/basic-usage.html
+liip_imagine:
+    # valid drivers options include "gd" or "gmagick" or "imagick"
+    resolvers:
+       profile_photos:
+            web_path:
+                # use %kernel.project_dir%/web for Symfony prior to 4.0.0
+                web_root: "%kernel.project_dir%/public"
+                cache_prefix: "/"
+    driver: "gd"
+    cache: ~
+    filter_sets:
+        thumbail:
+            format: jpeg
+            quality: 80
+            filters:
+                thumbnail: { size: [360, 230], mode: outbound }
+        card:
+            quality: 80
+            filters:
+                thumbnail: { size: [700, 500], mode: outbound }
+    # app/config/config.yml
+
+#liip_imagine:
+
+    # configure resolvers
+#    resolvers:
+
+        # setup the default resolver
+#        default:
+
+            # use the default web path
+#            web_path: ~
+
+    # your filter sets are defined here
+#    filter_sets:
+
+        # use the default cache configuration
+#        cache: ~

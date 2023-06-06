@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Titres</th>
+        <th coldspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+       {% for produit in option %}
+        <tr>
+          <td>{{produit.name}}</td>
+          <td><a href="{{path('edit_option',{id: produit.id})}}" class="btn btn-primary">editer</a></td>
+          <td>
+            <form method="POST" action="{{path('delete_option',{id: produit.id})}}">
+             <input type="hidden" name="_method" value="DELETE">
+             <input type="hidden" name="_token" value="{{csrf_token('delete_option' ~ produit.id)}}">
+             <button class="btn btn-danger">supprimer</button>
+            </form>
+          </td>
+        </tr>
+       {% endfor %}
+    </tbody>
+   </table>
+   <div class="text-end">
+    <a href="{{path('new_option')}}" class="btn btn-primary">creer une nouvelle option</a>
+   </div>
+{% endblock body %}
