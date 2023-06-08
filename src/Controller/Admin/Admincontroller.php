@@ -1,6 +1,10 @@
 <?php
 namespace Controller\Admin;
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> parent of 7c806a8 (ajout de l'image des propriete:etape 1(ajout seulement des 2 premieres propriete ))
 use App\Entity\Property;
 use App\Form\FormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -8,12 +12,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+<<<<<<< HEAD
  
+=======
+>>>>>>> parent of 7c806a8 (ajout de l'image des propriete:etape 1(ajout seulement des 2 premieres propriete ))
 
 class Admincontroller extends AbstractController
 {
     private $em;
-    const DIRECTORY='public/images/property';
     public function __construct(EntityManagerInterface $em)
     {
         $this->em=$em;

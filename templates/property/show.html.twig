@@ -3,11 +3,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
+<<<<<<< HEAD
             {%if(produit.imageName)%}
            <img src="{{vich_uploader_asset(produit,'imageFile') | imagine_filter('card')}}" class="img-fluid mt-4">
            {%else%}
            <img src="{{'images/property/christian-koch-d-4r9ccyzok-unsplash-648013019dde9807100227.jpg' | imagine_filter('card')}}" class="img-fluid mt-4">
            {%endif%}
+=======
+
+>>>>>>> parent of 7c806a8 (ajout de l'image des propriete:etape 1(ajout seulement des 2 premieres propriete ))
         </div>
         <div class="col-md-4">
             <div class="text-start mt-4 fw-bold fs-2 text-capitalize">{{produit.title}}</div>
@@ -43,12 +47,7 @@
             </table>
         </div>
         <div class="col-4">
-            <h2 class="fw-bolder">Specificites</h2>
-             {% for row in option %}
-             <ul>
-                <li>{{row.getName()}}</li>
-             </ul>
-             {% endfor %}
+            <h2 class="fw-bolder">Specificites</h2>    
         </div>
     </div>
 </div>

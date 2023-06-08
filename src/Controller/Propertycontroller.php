@@ -31,8 +31,7 @@ class Propertycontroller extends AbstractController{
             ],301);
         }
         return new Response($this->render('property/show.html.twig',[
-            'produit'=>$produit,
-            'option'=>$produit->getOptions()->toArray()
+            'produit'=>$produit
         ]));
     }
     /**

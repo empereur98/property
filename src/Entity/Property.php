@@ -3,16 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\PropertyRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 #[ORM\Entity(repositoryClass: PropertyRepository::class)]
-#[Vich\Uploadable]
 class Property
 {
     const HEAD=[
@@ -31,7 +27,7 @@ class Property
     private ?string $description = null;
 
     #[ORM\Column]
-    #[Assert\Range(min:"10",max:"1000")]
+    #[Assert\Range(min:"10",max:"400")]
     private ?int $surface = null;
 
     #[ORM\Column]
@@ -63,23 +59,9 @@ class Property
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
-
-    #[ORM\ManyToMany(targetEntity: Options::class, inversedBy: 'properties')]
-    private Collection $options;
-    #[Assert\Image(
-        mimeTypes:['image/jpg','image/jpeg'],
-        mimeTypesMessage:"The mime type of the file is invalid ({{ type }}). Allowed mime types are {{ types }}."
-    )]
-    #[Vich\UploadableField(mapping: 'property', fileNameProperty: 'imageName')]
-    private ?File $imageFile = null;
-    #[ORM\Column(nullable: true)]
-    private ?string $imageName = null;
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
     public function __construct()
     {
         $this->created_at=new \DateTimeImmutable();
-        $this->options = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -266,57 +248,5 @@ class Property
         $this->created_at = $created_at;
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, Options>
-     */
-    public function getOptions(): Collection
-    {
-        return $this->options;
-    }
-
-    public function addOption(Options $option): self
-    {
-        if (!$this->options->contains($option)) {
-            $this->options->add($option);
-            $option->addProperty($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOption(Options $option): self
-    {
-        if ($this->options->removeElement($option)) {
-            $option->removeProperty($this);
-        }
-
-        return $this;
-    }
-    public function setImageFile(?File $imageFile = null): void
-    {
-        $this->imageFile = $imageFile;
-
-        if (null !== $imageFile) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-    }
-
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageName(?string $imageName): void
-    {
-        $this->imageName = $imageName;
-    }
-
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
     }
 }

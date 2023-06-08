@@ -3,14 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Searchdata;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use App\Entity\Options;
-use App\Entity\Property;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class SearchType extends AbstractType
 {
@@ -29,13 +26,6 @@ class SearchType extends AbstractType
                 'required'=>false,
                 'attr'=>[
                 'placeholder'=>'Surface Minimale']
-            ])
-            ->add('options',EntityType::class,[
-                'class'=>Options::class,
-                'required'=>false,
-                'multiple'=>true,
-                'choice_label'=>'name',
-                'label'=>false,
             ])
         ;
     }
