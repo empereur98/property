@@ -1,19 +1,15 @@
 <?php
 namespace Controller\Admin;
-
-use App\Entity\Options;
+ 
 use App\Entity\Property;
 use App\Form\FormType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query\AST\NullComparisonExpression;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use \Liip\ImagineBundle\Imagine\Cache\CacheManager;
+ 
+
 class Admincontroller extends AbstractController
 {
     private $em;

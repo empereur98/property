@@ -35,9 +35,12 @@ class FormType extends AbstractType
             ->add('options',EntityType::class,[
                 'class'=>Options::class,
                 'multiple'=>true,
-                'choice_label'=>'name'
+                'choice_label'=>'name',
+                'required'=>false
             ])
-            ->add('imageFile',FileType::class)
+            ->add('imageFile',FileType::class,[
+                'required'=>false
+            ])
         ;
     }
 

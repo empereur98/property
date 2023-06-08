@@ -3,7 +3,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
+            {%if(produit.imageName)%}
            <img src="{{vich_uploader_asset(produit,'imageFile') | imagine_filter('card')}}" class="img-fluid mt-4">
+           {%else%}
+           <img src="{{'images/property/christian-koch-d-4r9ccyzok-unsplash-648013019dde9807100227.jpg' | imagine_filter('card')}}" class="img-fluid mt-4">
+           {%endif%}
         </div>
         <div class="col-md-4">
             <div class="text-start mt-4 fw-bold fs-2 text-capitalize">{{produit.title}}</div>
