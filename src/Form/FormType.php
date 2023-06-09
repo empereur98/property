@@ -30,7 +30,6 @@ class FormType extends AbstractType
             ->add('post')
             ->add('sold')
             ->add('created_at')
-<<<<<<< HEAD
             ->add('options',EntityType::class,[
                 'class'=>Options::class,
                 'multiple'=>true,
@@ -40,8 +39,6 @@ class FormType extends AbstractType
             ->add('imageFile',FileType::class,[
                 'required'=>false
             ])
-=======
->>>>>>> parent of 7c806a8 (ajout de l'image des propriete:etape 1(ajout seulement des 2 premieres propriete ))
         ;
     }
 
