@@ -11,7 +11,6 @@ class Contact
    private $lastname;
 #[Assert\Email(message:"yours email {{value}} is not correct")]
    private $email;
-#[Assert\regex('[0-9]{7}')]
    private $contact;
 public function getName():string{
     return $this->name;

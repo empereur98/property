@@ -2,13 +2,15 @@
 
 namespace App\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Property;
+use App\Entity\Options;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
-
 
 class FormType extends AbstractType
 {
@@ -32,9 +34,10 @@ class FormType extends AbstractType
             ->add('created_at')
             ->add('options',EntityType::class,[
                 'class'=>Options::class,
+                'choice_name'=>'name',
                 'multiple'=>true,
                 'choice_label'=>'name',
-                'required'=>false
+                'required'=>false,
             ])
             ->add('imageFile',FileType::class,[
                 'required'=>false

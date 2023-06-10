@@ -9,6 +9,8 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * @extends ServiceEntityRepository<Property>
  *
@@ -73,6 +75,13 @@ return $this->connect()
             $query=$query->andWhere('p.surface>:price')
                          ->setParameter('price',$search->getMinsurface());
         }
+            if($search->getOptions()!==null && $search->getOptions()->count()>0){
+                $options=$search->getOptions()->toArray();
+                 for ($i=0; $i < count($options); $i++) { 
+                    $query=$query->andWhere(":option$i MEMBER OF p.options")
+                             ->setParameter("option$i",$options[$i]);
+                 }    
+            }
         return $query->getQuery();
     }
     private function connect(){

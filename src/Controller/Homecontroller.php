@@ -2,7 +2,6 @@
 namespace Controller;
 
 use App\Entity\Property;
-use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,9 +21,10 @@ class Homecontroller extends AbstractController{
         $user->setPassword($hashpassword);
         $entityManager->persist($user);
         $entityManager->flush();*/
+
         $produits= $entityManager->getRepository(Property::class)->findlass();
         return new Response($this->render('pages/home.html.twig',[
-            'properties'=>$produits
+            'properties'=>$produits,
         ]));
     }
     

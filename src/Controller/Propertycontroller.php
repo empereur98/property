@@ -1,6 +1,6 @@
 <?php
 namespace Controller;
-
+use App\Entity\Contact;
 use App\Entity\Property;
 use App\Entity\Searchdata;
 use App\Form\SearchType;
@@ -10,6 +10,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\ContactType;
 use Symfony\Contracts\Translation\TranslatorInterface;
 class Propertycontroller extends AbstractController{
     #[Route('/property','propriete')]
@@ -21,7 +22,10 @@ class Propertycontroller extends AbstractController{
         ]);
     }
     #[Route('/biens/{slug}-{id}','property.show')]
-    public function show($slug,$id,EntityManagerInterface $entityManager):Response{
+    public function show($slug,$id,EntityManagerInterface $entityManager,Request $request):Response{
+        $contact=new Contact();
+        $form=$this->createForm(ContactType::class,$contact);
+        $form->handleRequest($request);
         $name=$entityManager->getRepository(Property::class);
         $produit=$name->find($id);
         if($slug!== $produit->getSlug()){
@@ -31,7 +35,8 @@ class Propertycontroller extends AbstractController{
             ],301);
         }
         return new Response($this->render('property/show.html.twig',[
-            'produit'=>$produit
+            'produit'=>$produit,
+            'form1'=>$form->createView()
         ]));
     }
     /**

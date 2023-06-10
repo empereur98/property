@@ -1,6 +1,8 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class Searchdata{
     /**
      * @var int|null
@@ -10,6 +12,10 @@ class Searchdata{
      * @var int|null
      */
     private $minSurface;
+    /**
+     * @var ArrayCollection|null
+     */
+    private $options;
 public function setMaxprice(int $maxPrice):self{
     $this->maxPrice=$maxPrice;
     return $this;
@@ -24,5 +30,11 @@ public function getMaxprice():?int{
 public function getMinsurface():?int{
     return $this->minSurface;
 }
-
+public function getOptions():?ArrayCollection{
+    return $this->options;
+}
+public function setOptions(ArrayCollection $options):self{
+    $this->options=$options;
+    return $this;
+}
 }

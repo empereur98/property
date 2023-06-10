@@ -10,15 +10,12 @@
 	{% for property in properties %}
 		<div class="col-3 d-inline-block">
 			<div class="card m-3">
-<<<<<<< HEAD
 				{% if property.imageName %}
 				<img src="{{vich_uploader_asset(property,'imageFile') | imagine_filter('thumbail')}}" class="card-img-top" alt="...">
 				{%else%}
 				<img src="{{ 'images/property/christian-6483d09f9c58d831968382.jpg' | imagine_filter('thumbail')}}" class="card-img-top" alt="...">
 				{% endif %}
 		
-=======
->>>>>>> parent of 7c806a8 (ajout de l'image des propriete:etape 1(ajout seulement des 2 premieres propriete ))
 				<div class="card-body">
 					<div class="card-title">
 						<h5><a href="{{path('property.show',{id : property.id, slug: property.slug })}}">{{property.title}}</a></h5>
