@@ -24,3 +24,4 @@
 ###< liip/imagine-bundle ###
 /public/media/cache
 /public/media/
+/node_modules

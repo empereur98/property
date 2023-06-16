@@ -9,9 +9,17 @@ class Contact
    private $name;
 #[Assert\NotBlank(message:"le champ null est vide")]
    private $lastname;
-#[Assert\Email(message:"yours email {{value}} is not correct")]
+#[Assert\Email(message:"yours email {{value}} is not correct"),
+Assert\NotBlank()]
    private $email;
+#[Assert\NotBlank()]
    private $contact;
+#[Assert\NotBlank()]
+   private $messages;
+   /**
+    * @var Property
+    */
+   private $property;
 public function getName():string{
     return $this->name;
 }
@@ -37,6 +45,20 @@ public function setContact($contact){
 }
 public function setEmail($email):self{
     $this->email=$email;
+    return $this;
+}
+public function getMessages():string{
+    return $this->messages;
+}
+public function setMessages(string $messages):self{
+    $this->messages=$messages;
+    return $this;
+}
+public function getProperty():Property{
+    return $this->property;
+}
+public function setProperty(Property $property):self{
+    $this->property=$property;
     return $this;
 }
 }

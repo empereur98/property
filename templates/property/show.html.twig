@@ -14,8 +14,27 @@
             <p class="fs-4 fw-medium mt-3">{{produit.rooms}} pieces  -   {{produit.surface}} m2</p>
             <p class="fs-1 text-primary fw-bolder ">{{produit.formattedprice}} $</p>
             <a href="#" class="btn btn-primary display-block">contacter l'agence</a>
-            {{form_start(form1)}}
-            {{form_end(form1)}}
+            {{form_start(form)}}
+            <div class="row mt-2">
+                <div class="col">
+                    {{form_row(form.name)}}
+                </div>
+                <div class="col">
+                    {{form_row(form.lastname)}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{form_row(form.email)}}
+                </div>
+                <div class="col">
+                    {{form_row(form.contact)}}
+                </div>
+            </div>
+            <div class="row">
+                {{form_row(form.messages)}}
+            </div>
+            {{form_end(form)}}
         </div>
     </div>
     <div class="row">

@@ -1,0 +1,41 @@
+{# templates/emails/signup.html.twig #}
+<h1>Welcome {{ contact.name }}!</h1>
+
+<div class="container">
+    une nouvelle personne souhaiterais avoir plus d'infos sur:
+</div>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nom du Biens</th>
+        <th scope="col">{{contact.property.title}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Nom:</th>
+        <td>{{contact.name}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Prenom</th>
+        <td>{{contact.lastname}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Email</th>
+        <td>{{contact.email}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Tel</th>
+        <td>{{contact.contact}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Message</th>
+        <td>{{contact.messages}}</td>
+      </tr>
+    </tbody>
+  </table>
+<p>
+    <a href="#">Click here to activate your account</a>
+    (this link is valid until {{ expiration_date|date('F jS') }})
+</p>

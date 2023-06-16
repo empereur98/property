@@ -32,6 +32,9 @@ services:
     Controller\Listener\ListenerSubcriber:
              tags:
                name: doctrine.event_subscriber
+    Controller\Notification\ContactNotification:
+             tags:
+                name: app.another_bus
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ContactType;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use App\Notifications\ContactNotification;
+use Symfony\Component\Mailer\MailerInterface;
 class Propertycontroller extends AbstractController{
     #[Route('/property','propriete')]
     public function index(EntityManagerInterface $entityManager):Response{
@@ -22,10 +24,8 @@ class Propertycontroller extends AbstractController{
         ]);
     }
     #[Route('/biens/{slug}-{id}','property.show')]
-    public function show($slug,$id,EntityManagerInterface $entityManager,Request $request):Response{
+    public function show($slug,$id,EntityManagerInterface $entityManager,Request $request,MailerInterface $mailer):Response{
         $contact=new Contact();
-        $form=$this->createForm(ContactType::class,$contact);
-        $form->handleRequest($request);
         $name=$entityManager->getRepository(Property::class);
         $produit=$name->find($id);
         if($slug!== $produit->getSlug()){
@@ -34,9 +34,22 @@ class Propertycontroller extends AbstractController{
                 'slug'=>$produit->getSlug()
             ],301);
         }
+        $contact->setProperty($produit);
+        $form=$this->createForm(ContactType::class,$contact);
+        $form->handleRequest($request);
+        $notification=new ContactNotification();
+        if($form->isSubmitted() && $form->isValid()){
+            $notification->notify($mailer,$contact);
+            $this->addFlash('success','votre Email a bien ete envoye');
+            return $this->redirectToRoute('property.show',[
+                'id'=>$produit->getId(),
+                'slug'=>$produit->getSlug()
+            ]);
+        }
+       
         return new Response($this->render('property/show.html.twig',[
             'produit'=>$produit,
-            'form1'=>$form->createView()
+            'form'=>$form->createView()
         ]));
     }
     /**
